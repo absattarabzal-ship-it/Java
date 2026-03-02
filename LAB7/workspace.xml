@@ -1,0 +1,162 @@
+import java.util.Arrays;
+import java.util.Scanner;
+
+public class Main {
+
+    public static void main(String[] args) {
+        System.out.println("=== Лабораторная работа №7 ===");
+
+        // Задания 1-5 (Одномерные массивы)
+        task1to5();
+
+        // Задания 6-10 (Двумерные массивы / Матрицы)
+        task6to10();
+
+        // Задания 11-14 (Операции с массивами)
+        task11to14();
+
+        // Задача 15 (Таблица 3x5)
+        task15();
+
+        // Задача 16 (Максимальный элемент)
+        System.out.println("\n16. Максимальный элемент: " + maxX());
+
+        // Задача 17 (Строки)
+        task17("Hello", " World", " Java", "test", "test");
+    }
+
+    // --- БЛОК 1: Простые вычисления ---
+    public static void task1to5() {
+        // 1. Сумма отрицательных A[20]
+        int[] a1 = new int[20];
+        int sumNeg = 0;
+        for(int i=0; i<20; i++) {
+            a1[i] = (int)(Math.random() * 100) - 50;
+            if(a1[i] < 0) sumNeg += a1[i];
+        }
+        System.out.println("1. Сумма отрицательных в A[20]: " + sumNeg);
+
+        // 2. Сумма положительных B[15]
+        int[] b2 = new int[15];
+        int sumPos = 0;
+        for(int i=0; i<15; i++) {
+            b2[i] = (int)(Math.random() * 100) - 50;
+            if(b2[i] > 0) sumPos += b2[i];
+        }
+        System.out.println("2. Сумма положительных в B[15]: " + sumPos);
+
+        // 3. Произведение отрицательных A[12] (double)
+        double[] a3 = new double[12];
+        double prodNeg = 1;
+        for(int i=0; i<12; i++) {
+            a3[i] = Math.random() * 20 - 10;
+            if(a3[i] < 0) prodNeg *= a3[i];
+        }
+        System.out.println("3. Произведение отрицательных A[12]: " + prodNeg);
+
+        // 5. Среднее арифметическое D[17]
+        int[] d5 = new int[17];
+        double sumAll = 0;
+        for(int i=0; i<17; i++) {
+            d5[i] = (int)(Math.random() * 100);
+            sumAll += d5[i];
+        }
+        System.out.println("5. Среднее арифметическое D[17]: " + (sumAll / 17));
+    }
+
+    // --- БЛОК 2: Матрицы (Двумерные) ---
+    public static void task6to10() {
+        // 6. Сумма отрицательных по строкам A[10][10] -> B[10]
+        int[][] a6 = new int[10][10];
+        int[] b6 = new int[10];
+        for(int i=0; i<10; i++) {
+            for(int j=0; j<10; j++) {
+                a6[i][j] = (int)(Math.random() * 100) - 50;
+                if(a6[i][j] < 0) b6[i] += a6[i][j];
+            }
+        }
+        System.out.println("6. Массив B (суммы отр. строк): " + Arrays.toString(b6));
+
+        // 9. Произведение полож. элементов главной диагонали C[5][5]
+        int[][] c9 = new int[5][5];
+        long prodDiag = 1;
+        for(int i=0; i<5; i++) {
+            for(int j=0; j<5; j++) {
+                c9[i][j] = (int)(Math.random() * 10) + 1;
+            }
+            if(c9[i][i] > 0) prodDiag *= c9[i][i];
+        }
+        System.out.println("9. Произведение главной диагонали C[5][5]: " + prodDiag);
+
+        // 10. Среднее диагонали D[7][7]
+        double[][] d10 = new double[7][7];
+        double sumDiag = 0;
+        for(int i=0; i<7; i++) {
+            d10[i][i] = Math.random() * 10;
+            sumDiag += d10[i][i];
+        }
+        System.out.println("10. Среднее диагонали D[7][7]: " + (sumDiag / 7));
+    }
+
+    // --- БЛОК 3: Алгоритмы ---
+    public static void task11to14() {
+        // 11. Поменять местами max и min в A[25]
+        int[] a11 = new int[25];
+        int minIdx = 0, maxIdx = 0;
+        for(int i=0; i<25; i++) {
+            a11[i] = (int)(Math.random() * 100);
+            if(a11[i] < a11[minIdx]) minIdx = i;
+            if(a11[i] > a11[maxIdx]) maxIdx = i;
+        }
+        int temp = a11[minIdx];
+        a11[minIdx] = a11[maxIdx];
+        a11[maxIdx] = temp;
+        System.out.println("11. Max и Min в A[25] успешно поменяны.");
+
+        // 12. Сортировка по возрастанию B[25]
+        int[] b12 = new int[25];
+        for(int i=0; i<25; i++) b12[i] = (int)(Math.random() * 100);
+        Arrays.sort(b12);
+        System.out.println("12. B[25] отсортирован: " + Arrays.toString(b12));
+
+        // 14. Сумма чётных и нечётных D[30]
+        int evenSum = 0, oddSum = 0;
+        for(int i=0; i<30; i++) {
+            int val = (int)(Math.random() * 100);
+            if(val % 2 == 0) evenSum += val; else oddSum += val;
+        }
+        System.out.println("14. Сумма чётных: " + evenSum + ", нечётных: " + oddSum);
+    }
+
+    // 15. Таблица 3x5 случайных чисел < 10
+    public static void task15() {
+        System.out.println("\n15. Таблица 3x5:");
+        for (int i = 0; i < 3; i++) {
+            for (int j = 0; j < 5; j++) {
+                System.out.print((int)(Math.random() * 10) + "\t");
+            }
+            System.out.println();
+        }
+    }
+
+    // 16. Метод maxX()
+    public static int maxX() {
+        int[] array = new int[10];
+        int max = Integer.MIN_VALUE;
+        for(int i=0; i<10; i++) {
+            array[i] = (int)(Math.random() * 50);
+            if(array[i] > max) max = array[i];
+        }
+        return max;
+    }
+
+    // 17. Строки
+    public static void task17(String s1, String s2, String s3, String s4, String s5) {
+        System.out.print("17. Работа со строками: ");
+        if (s4.equals(s5)) {
+            System.out.println(s1 + s2);
+        } else {
+            System.out.println("s4 не равно s5");
+        }
+    }
+}
